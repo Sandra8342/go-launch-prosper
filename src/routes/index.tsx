@@ -181,27 +181,23 @@ function Method() {
   const pillars = [
     {
       icon: Compass,
-      title: "Diagnóstico Estratégico",
-      body:
-        "Analiso cada ponto de contato seu com o cliente — Instagram, identidade visual, comunicação, posicionamento, site, landing pages e percepção de valor.",
+      title: "Presença Digital",
+      items: ["Instagram", "Site", "Landing Page", "WhatsApp", "Primeira impressão"],
     },
     {
       icon: Layout,
       title: "Posicionamento",
-      body:
-        "Identifico o que reduz sua autoridade e o que poderia comunicar com mais clareza o valor real do seu trabalho.",
+      items: ["Clareza da mensagem", "Especialização", "Percepção de valor", "Diferenciação"],
     },
     {
       icon: MessageSquare,
-      title: "Plano de Ação Priorizado",
-      body:
-        "Você recebe um plano personalizado, em ordem de impacto — não uma lista de tarefas, mas o que vale a pena ajustar primeiro.",
+      title: "Comunicação",
+      items: ["Tom de voz", "Identidade visual", "Consistência", "Experiência do cliente"],
     },
     {
       icon: Sparkles,
-      title: "Implementação com IA",
-      body:
-        "Mostro como usar Inteligência Artificial para acelerar as melhorias sem perder a sua autenticidade.",
+      title: "Credibilidade",
+      items: ["Autoridade", "Confiança", "Provas sociais", "Conversão"],
     },
   ];
   return (
@@ -209,15 +205,15 @@ function Method() {
       <div className="max-w-2xl">
         <span className="text-xs uppercase tracking-[0.2em] text-primary">Método Leve Digital™</span>
         <h2 className="mt-3 font-serif text-4xl leading-tight tracking-tight md:text-5xl">
-          Quatro pilares que sustentam o diagnóstico.
+          O que será analisado na sua Avaliação Estratégica
         </h2>
         <p className="mt-5 text-muted-foreground">
-          Um caminho construído para profissionais que valorizam credibilidade acima de
-          visibilidade.
+          Sua presença digital será analisada de forma estruturada para identificar os pontos
+          que fortalecem — e os que enfraquecem — sua autoridade.
         </p>
       </div>
       <div className="mt-12 grid gap-5 md:grid-cols-2">
-        {pillars.map(({ icon: Icon, title, body }) => (
+        {pillars.map(({ icon: Icon, title, items }) => (
           <article
             key={title}
             className="group rounded-2xl border border-border bg-card p-7 transition hover:border-primary/40 hover:shadow-sm"
@@ -226,7 +222,14 @@ function Method() {
               <Icon className="h-5 w-5" />
             </div>
             <h3 className="mt-5 font-serif text-2xl">{title}</h3>
-            <p className="mt-2 leading-relaxed text-muted-foreground">{body}</p>
+            <ul className="mt-3 space-y-2">
+              {items.map((it) => (
+                <li key={it} className="flex items-start gap-2 leading-relaxed text-muted-foreground">
+                  <Check className="mt-1 h-4 w-4 shrink-0 text-primary" />
+                  <span>{it}</span>
+                </li>
+              ))}
+            </ul>
           </article>
         ))}
       </div>
