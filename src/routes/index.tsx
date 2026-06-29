@@ -457,14 +457,14 @@ function About() {
             Sandra Campos.
           </h2>
           <p className="mt-5 leading-relaxed text-muted-foreground">
-            Mais de 15 anos de experiência na área de saúde mental, no Brasil e nos Estados
-            Unidos. Esse caminho me deu um olhar apurado sobre comportamento humano,
-            construção de confiança e tomada de decisão.
+            Mais de 15 anos trabalhando na área da saúde mental, no Brasil e nos Estados Unidos,
+            me ensinaram a identificar padrões, construir confiança e compreender como as
+            pessoas tomam decisões.
           </p>
           <p className="mt-4 leading-relaxed text-muted-foreground">
-            Hoje aplico tudo isso para ajudar terapeutas e profissionais liberais a
-            fortalecerem a presença digital de forma estratégica — transmitindo online a mesma
-            credibilidade que já entregam nos atendimentos.
+            Hoje aplico esse mesmo olhar estratégico para analisar a presença digital de
+            terapeutas e profissionais liberais, ajudando-os a transmitir online a mesma
+            credibilidade que já demonstram em seus atendimentos.
           </p>
           <p className="mt-6 font-serif text-2xl italic text-foreground">
             "Mais seguidores não significam mais clientes. Credibilidade gera muito mais
