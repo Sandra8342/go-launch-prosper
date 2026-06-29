@@ -144,6 +144,7 @@ function ForWhom() {
     "Mas seu Instagram, seu site e seus pontos de contato online não traduzem isso.",
     "Você sente que precisaria 'aparecer mais', mas isso não combina com você.",
     "Quer atrair clientes preparados para contratar, não curiosos de passagem.",
+    "Você sabe que precisa melhorar sua presença digital, mas não sabe por onde começar.",
   ];
   return (
     <section className="border-y border-border/60 bg-secondary/60">
