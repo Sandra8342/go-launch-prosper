@@ -23,7 +23,7 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
-const PRICE_BRL = "R$ 1.497";
+const PRICE_BRL = "R$ 697";
 const WHATSAPP_URL =
   "https://wa.me/5500000000000?text=Ol%C3%A1%20Sandra%2C%20quero%20agendar%20uma%20Avalia%C3%A7%C3%A3o%20Estrat%C3%A9gica%20de%20Presen%C3%A7a%20Digital.";
 
@@ -93,18 +93,32 @@ function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <a
-              href="#investimento"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"
             >
-              Ver como funciona <ArrowRight className="h-4 w-4" />
+              Solicitar minha Avaliação Estratégica <ArrowRight className="h-4 w-4" />
             </a>
             <a
               href="#relatorio"
               className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-medium text-foreground transition hover:bg-secondary"
             >
-              Ver um relatório modelo
+              Ver exemplo do relatório
             </a>
           </div>
+          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
+            {[
+              "Relatório Estratégico Personalizado",
+              "Plano de Ação Priorizado",
+              "Reunião Estratégica Individual",
+            ].map((b) => (
+              <li key={b} className="inline-flex items-center gap-2">
+                <Check className="h-4 w-4 text-primary" />
+                <span>{b}</span>
+              </li>
+            ))}
+          </ul>
           <p className="mt-6 text-sm text-muted-foreground">
             Sem fórmulas prontas. Sem pressão para postar todos os dias.
           </p>
@@ -130,6 +144,7 @@ function ForWhom() {
     "Mas seu Instagram, seu site e seus pontos de contato online não traduzem isso.",
     "Você sente que precisaria 'aparecer mais', mas isso não combina com você.",
     "Quer atrair clientes preparados para contratar, não curiosos de passagem.",
+    "Você sabe que precisa melhorar sua presença digital, mas não sabe por onde começar.",
   ];
   return (
     <section className="border-y border-border/60 bg-secondary/60">
@@ -166,27 +181,23 @@ function Method() {
   const pillars = [
     {
       icon: Compass,
-      title: "Diagnóstico Estratégico",
-      body:
-        "Analiso cada ponto de contato seu com o cliente — Instagram, identidade visual, comunicação, posicionamento, site, landing pages e percepção de valor.",
+      title: "Presença Digital",
+      items: ["Instagram", "Site", "Landing Page", "WhatsApp", "Primeira impressão"],
     },
     {
       icon: Layout,
       title: "Posicionamento",
-      body:
-        "Identifico o que reduz sua autoridade e o que poderia comunicar com mais clareza o valor real do seu trabalho.",
+      items: ["Clareza da mensagem", "Especialização", "Percepção de valor", "Diferenciação"],
     },
     {
       icon: MessageSquare,
-      title: "Plano de Ação Priorizado",
-      body:
-        "Você recebe um plano personalizado, em ordem de impacto — não uma lista de tarefas, mas o que vale a pena ajustar primeiro.",
+      title: "Comunicação",
+      items: ["Tom de voz", "Identidade visual", "Consistência", "Experiência do cliente"],
     },
     {
       icon: Sparkles,
-      title: "Implementação com IA",
-      body:
-        "Mostro como usar Inteligência Artificial para acelerar as melhorias sem perder a sua autenticidade.",
+      title: "Credibilidade",
+      items: ["Autoridade", "Confiança", "Provas sociais", "Conversão"],
     },
   ];
   return (
@@ -194,15 +205,15 @@ function Method() {
       <div className="max-w-2xl">
         <span className="text-xs uppercase tracking-[0.2em] text-primary">Método Leve Digital™</span>
         <h2 className="mt-3 font-serif text-4xl leading-tight tracking-tight md:text-5xl">
-          Quatro pilares que sustentam o diagnóstico.
+          O que será analisado na sua Avaliação Estratégica
         </h2>
         <p className="mt-5 text-muted-foreground">
-          Um caminho construído para profissionais que valorizam credibilidade acima de
-          visibilidade.
+          Sua presença digital será analisada de forma estruturada para identificar os pontos
+          que fortalecem — e os que enfraquecem — sua autoridade.
         </p>
       </div>
       <div className="mt-12 grid gap-5 md:grid-cols-2">
-        {pillars.map(({ icon: Icon, title, body }) => (
+        {pillars.map(({ icon: Icon, title, items }) => (
           <article
             key={title}
             className="group rounded-2xl border border-border bg-card p-7 transition hover:border-primary/40 hover:shadow-sm"
@@ -211,7 +222,14 @@ function Method() {
               <Icon className="h-5 w-5" />
             </div>
             <h3 className="mt-5 font-serif text-2xl">{title}</h3>
-            <p className="mt-2 leading-relaxed text-muted-foreground">{body}</p>
+            <ul className="mt-3 space-y-2">
+              {items.map((it) => (
+                <li key={it} className="flex items-start gap-2 leading-relaxed text-muted-foreground">
+                  <Check className="mt-1 h-4 w-4 shrink-0 text-primary" />
+                  <span>{it}</span>
+                </li>
+              ))}
+            </ul>
           </article>
         ))}
       </div>
@@ -237,8 +255,12 @@ function WhatYouGet() {
             O que você recebe ao final.
           </h2>
           <p className="mt-5 text-muted-foreground">
-            Um documento de aproximadamente 25 a 35 páginas, claro e prático. Pensado para ser
-            lido com calma e aplicado no seu ritmo — sozinha ou com sua equipe.
+            Você receberá um relatório estratégico personalizado, organizado por prioridades,
+            com recomendações práticas para fortalecer sua autoridade digital e orientar suas
+            próximas decisões.
+          </p>
+          <p className="mt-4 text-muted-foreground">
+            Estruturado para facilitar decisões e orientar ações de maior impacto.
           </p>
           <div className="mt-8 rounded-xl border border-border bg-card p-6 text-sm leading-relaxed text-muted-foreground">
             <p className="text-foreground font-medium">Como funciona</p>
@@ -271,21 +293,37 @@ function SampleReport() {
             <div className="border-b border-border bg-secondary/80 px-6 py-3 text-xs uppercase tracking-[0.18em] text-muted-foreground">
               Pré-visualização · relatório modelo
             </div>
-            <div className="space-y-4 p-8">
-              <p className="text-xs uppercase tracking-[0.2em] text-primary">Avaliação Estratégica</p>
-              <h3 className="font-serif text-3xl leading-tight">
-                Diagnóstico de Presença Digital — Cliente Exemplo
-              </h3>
+            <div className="space-y-5 p-8">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.2em] text-primary">Avaliação Estratégica</p>
+                  <h3 className="mt-1 font-serif text-2xl leading-tight">
+                    Diagnóstico de Presença Digital
+                  </h3>
+                  <p className="mt-1 text-xs text-muted-foreground">Cliente Exemplo · Data: 29/06/2026</p>
+                </div>
+                <div className="rounded-xl border border-border bg-secondary/60 px-4 py-3 text-center">
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Nota Geral</p>
+                  <p className="font-serif text-3xl leading-none text-foreground">7,2</p>
+                  <p className="text-[10px] text-muted-foreground">/ 10</p>
+                </div>
+              </div>
               <div className="h-px bg-border" />
-              <div className="grid gap-4 text-sm">
-                <Row label="Posicionamento atual" value="Comunica serviço, não comunica autoridade" />
-                <Row label="Clareza da promessa" value="Parcial — bio genérica" />
-                <Row label="Coerência visual" value="3 estilos diferentes no feed" />
-                <Row label="Prioridade #1" value="Reescrever bio + 3 destaques principais" />
+              <div>
+                <p className="mb-3 text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                  Índice de Autoridade Digital
+                </p>
+                <AuthorityRadar />
+              </div>
+              <div className="h-px bg-border" />
+              <div className="grid gap-3 text-sm">
+                <Row label="Posicionamento" value="Comunica serviço, não autoridade" />
+                <Row label="Clareza da promessa" value="Parcial" />
+                <Row label="Prioridade #1" value="Reescrever bio + destaques" />
               </div>
               <a
                 href="/relatorio-exemplo"
-                className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+                className="mt-2 inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
               >
                 Ver relatório completo <ArrowRight className="h-4 w-4" />
               </a>
@@ -322,6 +360,85 @@ function Row({ label, value }: { label: string; value: string }) {
   );
 }
 
+function AuthorityRadar() {
+  const axes = [
+    { label: "Presença", value: 0.72 },
+    { label: "Posicionamento", value: 0.58 },
+    { label: "Comunicação", value: 0.81 },
+    { label: "Credibilidade", value: 0.66 },
+    { label: "Conversão", value: 0.49 },
+  ];
+  const size = 220;
+  const cx = size / 2;
+  const cy = size / 2;
+  const radius = 78;
+  const n = axes.length;
+  const point = (i: number, r: number) => {
+    const angle = (Math.PI * 2 * i) / n - Math.PI / 2;
+    return [cx + Math.cos(angle) * r, cy + Math.sin(angle) * r] as const;
+  };
+  const ringPath = (r: number) =>
+    axes
+      .map((_, i) => {
+        const [x, y] = point(i, r);
+        return `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`;
+      })
+      .join(" ") + " Z";
+  const dataPath =
+    axes
+      .map((a, i) => {
+        const [x, y] = point(i, radius * a.value);
+        return `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`;
+      })
+      .join(" ") + " Z";
+  return (
+    <div className="flex items-center justify-center">
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="text-primary">
+        {[0.25, 0.5, 0.75, 1].map((s) => (
+          <path
+            key={s}
+            d={ringPath(radius * s)}
+            fill="none"
+            stroke="currentColor"
+            strokeOpacity={0.12}
+          />
+        ))}
+        {axes.map((_, i) => {
+          const [x, y] = point(i, radius);
+          return (
+            <line
+              key={i}
+              x1={cx}
+              y1={cy}
+              x2={x}
+              y2={y}
+              stroke="currentColor"
+              strokeOpacity={0.12}
+            />
+          );
+        })}
+        <path d={dataPath} fill="currentColor" fillOpacity={0.18} stroke="currentColor" strokeWidth={1.5} />
+        {axes.map((a, i) => {
+          const [x, y] = point(i, radius + 16);
+          return (
+            <text
+              key={a.label}
+              x={x}
+              y={y}
+              textAnchor="middle"
+              dominantBaseline="middle"
+              className="fill-muted-foreground"
+              style={{ fontSize: 10 }}
+            >
+              {a.label}
+            </text>
+          );
+        })}
+      </svg>
+    </div>
+  );
+}
+
 function About() {
   return (
     <section className="border-y border-border/60 bg-secondary/60">
@@ -340,14 +457,14 @@ function About() {
             Sandra Campos.
           </h2>
           <p className="mt-5 leading-relaxed text-muted-foreground">
-            Mais de 15 anos de experiência na área de saúde mental, no Brasil e nos Estados
-            Unidos. Esse caminho me deu um olhar apurado sobre comportamento humano,
-            construção de confiança e tomada de decisão.
+            Mais de 15 anos trabalhando na área da saúde mental, no Brasil e nos Estados Unidos,
+            me ensinaram a identificar padrões, construir confiança e compreender como as
+            pessoas tomam decisões.
           </p>
           <p className="mt-4 leading-relaxed text-muted-foreground">
-            Hoje aplico tudo isso para ajudar terapeutas e profissionais liberais a
-            fortalecerem a presença digital de forma estratégica — transmitindo online a mesma
-            credibilidade que já entregam nos atendimentos.
+            Hoje aplico esse mesmo olhar estratégico para analisar a presença digital de
+            terapeutas e profissionais liberais, ajudando-os a transmitir online a mesma
+            credibilidade que já demonstram em seus atendimentos.
           </p>
           <p className="mt-6 font-serif text-2xl italic text-foreground">
             "Mais seguidores não significam mais clientes. Credibilidade gera muito mais
@@ -362,7 +479,7 @@ function About() {
 function Pricing() {
   const included = [
     "Análise estratégica de todos os pontos de contato digitais",
-    "Relatório completo em PDF (25–35 páginas)",
+    "Relatório estratégico personalizado, organizado por prioridades",
     "Plano de ação priorizado e personalizado",
     "Call de 60 minutos para apresentação do diagnóstico",
     "Recomendações de uso de IA para implementação",
@@ -373,7 +490,7 @@ function Pricing() {
       <div className="mx-auto max-w-3xl text-center">
         <span className="text-xs uppercase tracking-[0.2em] text-primary">Investimento</span>
         <h2 className="mt-3 font-serif text-4xl leading-tight tracking-tight md:text-5xl">
-          Um diagnóstico que se paga no primeiro cliente que você atrai com mais clareza.
+          Uma avaliação estratégica para tomar decisões com mais clareza e confiança.
         </h2>
       </div>
       <div className="mx-auto mt-12 max-w-2xl overflow-hidden rounded-3xl border border-border bg-card shadow-[0_30px_80px_-50px_rgba(40,50,40,0.35)]">
@@ -399,10 +516,10 @@ function Pricing() {
             rel="noreferrer"
             className="mt-10 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"
           >
-            Quero agendar minha avaliação <ArrowRight className="h-4 w-4" />
+            Solicitar minha Avaliação Estratégica <ArrowRight className="h-4 w-4" />
           </a>
           <p className="mt-4 text-xs text-muted-foreground">
-            Vagas limitadas a 4 avaliações por mês para manter a profundidade da análise.
+            Vagas limitadas para garantir a profundidade e a personalização de cada análise.
           </p>
         </div>
       </div>
@@ -467,7 +584,7 @@ function FinalCTA() {
         rel="noreferrer"
         className="mt-8 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"
       >
-        Agendar minha Avaliação Estratégica <ArrowRight className="h-4 w-4" />
+        Solicitar minha Avaliação Estratégica <ArrowRight className="h-4 w-4" />
       </a>
     </section>
   );
