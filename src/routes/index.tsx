@@ -23,7 +23,7 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
-const PRICE_BRL = "R$ 1.497";
+const PRICE_BRL = "R$ 697";
 const WHATSAPP_URL =
   "https://wa.me/5500000000000?text=Ol%C3%A1%20Sandra%2C%20quero%20agendar%20uma%20Avalia%C3%A7%C3%A3o%20Estrat%C3%A9gica%20de%20Presen%C3%A7a%20Digital.";
 
