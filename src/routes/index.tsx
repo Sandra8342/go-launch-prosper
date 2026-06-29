@@ -93,18 +93,32 @@ function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <a
-              href="#investimento"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"
             >
-              Ver como funciona <ArrowRight className="h-4 w-4" />
+              Solicitar minha Avaliação Estratégica <ArrowRight className="h-4 w-4" />
             </a>
             <a
               href="#relatorio"
               className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-medium text-foreground transition hover:bg-secondary"
             >
-              Ver um relatório modelo
+              Ver exemplo do relatório
             </a>
           </div>
+          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
+            {[
+              "Relatório Estratégico Personalizado",
+              "Plano de Ação Priorizado",
+              "Reunião Estratégica Individual",
+            ].map((b) => (
+              <li key={b} className="inline-flex items-center gap-2">
+                <Check className="h-4 w-4 text-primary" />
+                <span>{b}</span>
+              </li>
+            ))}
+          </ul>
           <p className="mt-6 text-sm text-muted-foreground">
             Sem fórmulas prontas. Sem pressão para postar todos os dias.
           </p>
