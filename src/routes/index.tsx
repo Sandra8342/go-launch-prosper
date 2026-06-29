@@ -479,7 +479,7 @@ function About() {
 function Pricing() {
   const included = [
     "Análise estratégica de todos os pontos de contato digitais",
-    "Relatório completo em PDF (25–35 páginas)",
+    "Relatório estratégico personalizado, organizado por prioridades",
     "Plano de ação priorizado e personalizado",
     "Call de 60 minutos para apresentação do diagnóstico",
     "Recomendações de uso de IA para implementação",
