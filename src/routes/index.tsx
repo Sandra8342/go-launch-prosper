@@ -516,7 +516,7 @@ function Pricing() {
             rel="noreferrer"
             className="mt-10 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"
           >
-            Quero agendar minha avaliação <ArrowRight className="h-4 w-4" />
+            Solicitar minha Avaliação Estratégica <ArrowRight className="h-4 w-4" />
           </a>
           <p className="mt-4 text-xs text-muted-foreground">
             Vagas limitadas a 4 avaliações por mês para manter a profundidade da análise.
