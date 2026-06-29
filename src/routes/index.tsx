@@ -255,8 +255,12 @@ function WhatYouGet() {
             O que você recebe ao final.
           </h2>
           <p className="mt-5 text-muted-foreground">
-            Um documento de aproximadamente 25 a 35 páginas, claro e prático. Pensado para ser
-            lido com calma e aplicado no seu ritmo — sozinha ou com sua equipe.
+            Você receberá um relatório estratégico personalizado, organizado por prioridades,
+            com recomendações práticas para fortalecer sua autoridade digital e orientar suas
+            próximas decisões.
+          </p>
+          <p className="mt-4 text-muted-foreground">
+            Estruturado para facilitar decisões e orientar ações de maior impacto.
           </p>
           <div className="mt-8 rounded-xl border border-border bg-card p-6 text-sm leading-relaxed text-muted-foreground">
             <p className="text-foreground font-medium">Como funciona</p>
