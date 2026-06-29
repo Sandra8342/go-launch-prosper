@@ -360,6 +360,85 @@ function Row({ label, value }: { label: string; value: string }) {
   );
 }
 
+function AuthorityRadar() {
+  const axes = [
+    { label: "Presença", value: 0.72 },
+    { label: "Posicionamento", value: 0.58 },
+    { label: "Comunicação", value: 0.81 },
+    { label: "Credibilidade", value: 0.66 },
+    { label: "Conversão", value: 0.49 },
+  ];
+  const size = 220;
+  const cx = size / 2;
+  const cy = size / 2;
+  const radius = 78;
+  const n = axes.length;
+  const point = (i: number, r: number) => {
+    const angle = (Math.PI * 2 * i) / n - Math.PI / 2;
+    return [cx + Math.cos(angle) * r, cy + Math.sin(angle) * r] as const;
+  };
+  const ringPath = (r: number) =>
+    axes
+      .map((_, i) => {
+        const [x, y] = point(i, r);
+        return `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`;
+      })
+      .join(" ") + " Z";
+  const dataPath =
+    axes
+      .map((a, i) => {
+        const [x, y] = point(i, radius * a.value);
+        return `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`;
+      })
+      .join(" ") + " Z";
+  return (
+    <div className="flex items-center justify-center">
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="text-primary">
+        {[0.25, 0.5, 0.75, 1].map((s) => (
+          <path
+            key={s}
+            d={ringPath(radius * s)}
+            fill="none"
+            stroke="currentColor"
+            strokeOpacity={0.12}
+          />
+        ))}
+        {axes.map((_, i) => {
+          const [x, y] = point(i, radius);
+          return (
+            <line
+              key={i}
+              x1={cx}
+              y1={cy}
+              x2={x}
+              y2={y}
+              stroke="currentColor"
+              strokeOpacity={0.12}
+            />
+          );
+        })}
+        <path d={dataPath} fill="currentColor" fillOpacity={0.18} stroke="currentColor" strokeWidth={1.5} />
+        {axes.map((a, i) => {
+          const [x, y] = point(i, radius + 16);
+          return (
+            <text
+              key={a.label}
+              x={x}
+              y={y}
+              textAnchor="middle"
+              dominantBaseline="middle"
+              className="fill-muted-foreground"
+              style={{ fontSize: 10 }}
+            >
+              {a.label}
+            </text>
+          );
+        })}
+      </svg>
+    </div>
+  );
+}
+
 function About() {
   return (
     <section className="border-y border-border/60 bg-secondary/60">
