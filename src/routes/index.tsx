@@ -519,7 +519,7 @@ function Pricing() {
             Solicitar minha Avaliação Estratégica <ArrowRight className="h-4 w-4" />
           </a>
           <p className="mt-4 text-xs text-muted-foreground">
-            Vagas limitadas a 4 avaliações por mês para manter a profundidade da análise.
+            Vagas limitadas para garantir a profundidade e a personalização de cada análise.
           </p>
         </div>
       </div>
