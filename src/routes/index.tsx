@@ -490,7 +490,7 @@ function Pricing() {
       <div className="mx-auto max-w-3xl text-center">
         <span className="text-xs uppercase tracking-[0.2em] text-primary">Investimento</span>
         <h2 className="mt-3 font-serif text-4xl leading-tight tracking-tight md:text-5xl">
-          Um diagnóstico que se paga no primeiro cliente que você atrai com mais clareza.
+          Uma avaliação estratégica para tomar decisões com mais clareza e confiança.
         </h2>
       </div>
       <div className="mx-auto mt-12 max-w-2xl overflow-hidden rounded-3xl border border-border bg-card shadow-[0_30px_80px_-50px_rgba(40,50,40,0.35)]">
