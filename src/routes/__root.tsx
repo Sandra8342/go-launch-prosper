@@ -77,22 +77,43 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Sandra Campos — Avaliação Estratégica de Presença Digital" },
+      {
+        name: "description",
+        content:
+          "Para terapeutas e profissionais liberais que querem que a presença digital transmita a mesma confiança que já entregam no atendimento. Sem virar influencer.",
+      },
+      { name: "author", content: "Sandra Campos" },
+      { property: "og:title", content: "Avaliação Estratégica de Presença Digital — Sandra Campos" },
+      {
+        property: "og:description",
+        content:
+          "Diagnóstico completo da sua presença digital com plano de ação personalizado. Para quem entrega valor no consultório e quer que o online conte a mesma história.",
+      },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
+      {
+        rel: "preconnect",
+        href: "https://fonts.googleapis.com",
+      },
+      {
+        rel: "preconnect",
+        href: "https://fonts.gstatic.com",
+        crossOrigin: "anonymous",
+      },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600;700&display=swap",
+      },
       {
         rel: "stylesheet",
         href: appCss,
       },
     ],
   }),
+
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
