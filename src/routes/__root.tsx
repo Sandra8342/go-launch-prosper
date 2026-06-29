@@ -84,7 +84,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Para terapeutas e profissionais liberais que querem que a presença digital transmita a mesma confiança que já entregam no atendimento. Sem virar influencer.",
       },
       { name: "author", content: "Sandra Campos" },
-      { property: "og:title", content: "Avaliação Estratégica de Presença Digital — Sandra Campos" },
+      { property: "og:title", content: "Sandra Campos — Avaliação Estratégica de Presença Digital" },
       {
         property: "og:description",
         content:
@@ -92,6 +92,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Sandra Campos — Avaliação Estratégica de Presença Digital" },
+      { name: "description", content: "Launchpad Strategy creates a strategic assessment landing page and client report template." },
+      { property: "og:description", content: "Launchpad Strategy creates a strategic assessment landing page and client report template." },
+      { name: "twitter:description", content: "Launchpad Strategy creates a strategic assessment landing page and client report template." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7739e225-ea0a-4a16-98e3-74ad3ce156df/id-preview-0b3e43d5--334d3c0a-c07b-4d4a-9233-7aff78c12ff1.lovable.app-1782766699480.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/7739e225-ea0a-4a16-98e3-74ad3ce156df/id-preview-0b3e43d5--334d3c0a-c07b-4d4a-9233-7aff78c12ff1.lovable.app-1782766699480.png" },
     ],
     links: [
       {
