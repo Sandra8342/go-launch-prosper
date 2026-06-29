@@ -293,21 +293,37 @@ function SampleReport() {
             <div className="border-b border-border bg-secondary/80 px-6 py-3 text-xs uppercase tracking-[0.18em] text-muted-foreground">
               Pré-visualização · relatório modelo
             </div>
-            <div className="space-y-4 p-8">
-              <p className="text-xs uppercase tracking-[0.2em] text-primary">Avaliação Estratégica</p>
-              <h3 className="font-serif text-3xl leading-tight">
-                Diagnóstico de Presença Digital — Cliente Exemplo
-              </h3>
+            <div className="space-y-5 p-8">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.2em] text-primary">Avaliação Estratégica</p>
+                  <h3 className="mt-1 font-serif text-2xl leading-tight">
+                    Diagnóstico de Presença Digital
+                  </h3>
+                  <p className="mt-1 text-xs text-muted-foreground">Cliente Exemplo · Data: 29/06/2026</p>
+                </div>
+                <div className="rounded-xl border border-border bg-secondary/60 px-4 py-3 text-center">
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Nota Geral</p>
+                  <p className="font-serif text-3xl leading-none text-foreground">7,2</p>
+                  <p className="text-[10px] text-muted-foreground">/ 10</p>
+                </div>
+              </div>
               <div className="h-px bg-border" />
-              <div className="grid gap-4 text-sm">
-                <Row label="Posicionamento atual" value="Comunica serviço, não comunica autoridade" />
-                <Row label="Clareza da promessa" value="Parcial — bio genérica" />
-                <Row label="Coerência visual" value="3 estilos diferentes no feed" />
-                <Row label="Prioridade #1" value="Reescrever bio + 3 destaques principais" />
+              <div>
+                <p className="mb-3 text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                  Índice de Autoridade Digital
+                </p>
+                <AuthorityRadar />
+              </div>
+              <div className="h-px bg-border" />
+              <div className="grid gap-3 text-sm">
+                <Row label="Posicionamento" value="Comunica serviço, não autoridade" />
+                <Row label="Clareza da promessa" value="Parcial" />
+                <Row label="Prioridade #1" value="Reescrever bio + destaques" />
               </div>
               <a
                 href="/relatorio-exemplo"
-                className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+                className="mt-2 inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
               >
                 Ver relatório completo <ArrowRight className="h-4 w-4" />
               </a>
