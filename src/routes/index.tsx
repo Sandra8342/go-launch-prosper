@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, Instagram, Layout, MessageSquare, Sparkles, Compass, Leaf } from "lucide-react";
 import heroDesk from "@/assets/hero-desk.jpg";
 import sandraPortrait from "@/assets/sandra-portrait.jpg";
+import { LanguageProvider, useLanguage, type Lang } from "@/lib/language";
+import { translations } from "@/lib/translations";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,10 +26,21 @@ export const Route = createFileRoute("/")({
 });
 
 const PRICE_BRL = "R$ 697";
-const WHATSAPP_URL =
-  "https://wa.me/5500000000000?text=Ol%C3%A1%20Sandra%2C%20quero%20agendar%20uma%20Avalia%C3%A7%C3%A3o%20Estrat%C3%A9gica%20de%20Presen%C3%A7a%20Digital.";
+
+function whatsappUrl(lang: Lang) {
+  const message = encodeURIComponent(translations[lang].whatsappMessage);
+  return `https://wa.me/5500000000000?text=${message}`;
+}
 
 function LandingPage() {
+  return (
+    <LanguageProvider>
+      <PageContent />
+    </LanguageProvider>
+  );
+}
+
+function PageContent() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
@@ -47,7 +60,41 @@ function LandingPage() {
   );
 }
 
+function LanguageToggle() {
+  const { lang, setLang } = useLanguage();
+  return (
+    <div className="inline-flex items-center gap-1 rounded-full border border-border bg-secondary/60 p-1">
+      <button
+        type="button"
+        onClick={() => setLang("pt")}
+        aria-pressed={lang === "pt"}
+        aria-label="Português"
+        title="Português"
+        className={`flex h-7 w-8 items-center justify-center rounded-full text-base leading-none transition ${
+          lang === "pt" ? "bg-card shadow-sm ring-1 ring-primary/40" : "opacity-50 hover:opacity-100"
+        }`}
+      >
+        🇧🇷
+      </button>
+      <button
+        type="button"
+        onClick={() => setLang("en")}
+        aria-pressed={lang === "en"}
+        aria-label="English"
+        title="English"
+        className={`flex h-7 w-8 items-center justify-center rounded-full text-base leading-none transition ${
+          lang === "en" ? "bg-card shadow-sm ring-1 ring-primary/40" : "opacity-50 hover:opacity-100"
+        }`}
+      >
+        🇺🇸
+      </button>
+    </div>
+  );
+}
+
 function Header() {
+  const { lang } = useLanguage();
+  const t = translations[lang].header;
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
@@ -56,63 +103,62 @@ function Header() {
           <span className="font-serif text-xl tracking-tight">Sandra Campos</span>
         </a>
         <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
-          <a href="#metodo" className="hover:text-foreground">Método</a>
-          <a href="#entrega" className="hover:text-foreground">O que você recebe</a>
-          <a href="#relatorio" className="hover:text-foreground">Relatório</a>
-          <a href="#investimento" className="hover:text-foreground">Investimento</a>
+          <a href="#metodo" className="hover:text-foreground">{t.nav[0]}</a>
+          <a href="#entrega" className="hover:text-foreground">{t.nav[1]}</a>
+          <a href="#relatorio" className="hover:text-foreground">{t.nav[2]}</a>
+          <a href="#investimento" className="hover:text-foreground">{t.nav[3]}</a>
         </nav>
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="hidden rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:bg-primary/90 md:inline-flex"
-        >
-          Agendar avaliação
-        </a>
+        <div className="flex items-center gap-3">
+          <LanguageToggle />
+          <a
+            href={whatsappUrl(lang)}
+            target="_blank"
+            rel="noreferrer"
+            className="hidden rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:bg-primary/90 md:inline-flex"
+          >
+            {t.cta}
+          </a>
+        </div>
       </div>
     </header>
   );
 }
 
 function Hero() {
+  const { lang } = useLanguage();
+  const t = translations[lang].hero;
   return (
     <section id="topo" className="relative overflow-hidden">
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-2 md:py-28">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3 py-1 text-xs uppercase tracking-[0.18em] text-secondary-foreground">
             <Sparkles className="h-3.5 w-3.5" />
-            Avaliação Estratégica de Presença Digital
+            {t.badge}
           </span>
           <h1 className="mt-6 font-serif text-5xl leading-[1.05] tracking-tight md:text-6xl">
-            Sua presença digital pode contar a mesma história que você já entrega no atendimento.
+            {t.title}
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            Para terapeutas e profissionais liberais que fazem um trabalho excelente, mas
-            sentem que o online ainda não comunica esse valor — e que não querem virar influencer
-            para resolver isso.
+            {t.subtitle}
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <a
-              href={WHATSAPP_URL}
+              href={whatsappUrl(lang)}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"
             >
-              Solicitar minha Avaliação Estratégica <ArrowRight className="h-4 w-4" />
+              {t.ctaPrimary} <ArrowRight className="h-4 w-4" />
             </a>
             <a
               href="#relatorio"
               className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-medium text-foreground transition hover:bg-secondary"
             >
-              Ver exemplo do relatório
+              {t.ctaSecondary}
             </a>
           </div>
           <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground">
-            {[
-              "Relatório Estratégico Personalizado",
-              "Plano de Ação Priorizado",
-              "Reunião Estratégica Individual",
-            ].map((b) => (
+            {t.bullets.map((b) => (
               <li key={b} className="inline-flex items-center gap-2">
                 <Check className="h-4 w-4 text-primary" />
                 <span>{b}</span>
@@ -120,14 +166,14 @@ function Hero() {
             ))}
           </ul>
           <p className="mt-6 text-sm text-muted-foreground">
-            Sem fórmulas prontas. Sem pressão para postar todos os dias.
+            {t.note}
           </p>
         </div>
         <div className="relative">
           <div className="absolute -inset-6 -z-10 rounded-3xl bg-accent/40 blur-2xl" />
           <img
             src={heroDesk}
-            alt="Mesa de trabalho organizada com caderno aberto, planta e xícara de chá"
+            alt={t.imageAlt}
             width={1536}
             height={1280}
             className="rounded-2xl border border-border/60 object-cover shadow-[0_30px_80px_-40px_rgba(40,50,40,0.35)]"
@@ -139,35 +185,28 @@ function Hero() {
 }
 
 function ForWhom() {
-  const items = [
-    "Você é boa no que faz — seus pacientes voltam e indicam.",
-    "Mas seu Instagram, seu site e seus pontos de contato online não traduzem isso.",
-    "Você sente que precisaria 'aparecer mais', mas isso não combina com você.",
-    "Quer atrair clientes preparados para contratar, não curiosos de passagem.",
-    "Você sabe que precisa melhorar sua presença digital, mas não sabe por onde começar.",
-  ];
+  const { lang } = useLanguage();
+  const t = translations[lang].forWhom;
   return (
     <section className="border-y border-border/60 bg-secondary/60">
       <div className="mx-auto max-w-6xl px-6 py-20">
         <div className="grid gap-10 md:grid-cols-[1fr_1.2fr] md:items-start">
           <div>
             <h2 className="font-serif text-4xl leading-tight tracking-tight md:text-5xl">
-              Se você se reconhece aqui, essa avaliação foi pensada para você.
+              {t.title}
             </h2>
             <p className="mt-5 text-muted-foreground">
-              A maioria das profissionais que me procura entrega muito mais valor do que a
-              presença digital delas mostra. O problema raramente é falta de talento — é falta
-              de estratégia.
+              {t.subtitle}
             </p>
           </div>
           <ul className="space-y-4">
-            {items.map((t) => (
+            {t.items.map((text) => (
               <li
-                key={t}
+                key={text}
                 className="flex items-start gap-3 rounded-xl border border-border bg-card p-5 text-card-foreground"
               >
                 <Check className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                <span className="leading-relaxed">{t}</span>
+                <span className="leading-relaxed">{text}</span>
               </li>
             ))}
           </ul>
@@ -177,105 +216,80 @@ function ForWhom() {
   );
 }
 
+const METHOD_ICONS = [Compass, Layout, MessageSquare, Sparkles];
+
 function Method() {
-  const pillars = [
-    {
-      icon: Compass,
-      title: "Presença Digital",
-      items: ["Instagram", "Site", "Landing Page", "WhatsApp", "Primeira impressão"],
-    },
-    {
-      icon: Layout,
-      title: "Posicionamento",
-      items: ["Clareza da mensagem", "Especialização", "Percepção de valor", "Diferenciação"],
-    },
-    {
-      icon: MessageSquare,
-      title: "Comunicação",
-      items: ["Tom de voz", "Identidade visual", "Consistência", "Experiência do cliente"],
-    },
-    {
-      icon: Sparkles,
-      title: "Credibilidade",
-      items: ["Autoridade", "Confiança", "Provas sociais", "Conversão"],
-    },
-  ];
+  const { lang } = useLanguage();
+  const t = translations[lang].method;
   return (
     <section id="metodo" className="mx-auto max-w-6xl px-6 py-24">
       <div className="max-w-2xl">
-        <span className="text-xs uppercase tracking-[0.2em] text-primary">Método Leve Digital™</span>
+        <span className="text-xs uppercase tracking-[0.2em] text-primary">{t.kicker}</span>
         <h2 className="mt-3 font-serif text-4xl leading-tight tracking-tight md:text-5xl">
-          O que será analisado na sua Avaliação Estratégica
+          {t.title}
         </h2>
         <p className="mt-5 text-muted-foreground">
-          Sua presença digital será analisada de forma estruturada para identificar os pontos
-          que fortalecem — e os que enfraquecem — sua autoridade.
+          {t.subtitle}
         </p>
       </div>
       <div className="mt-12 grid gap-5 md:grid-cols-2">
-        {pillars.map(({ icon: Icon, title, items }) => (
-          <article
-            key={title}
-            className="group rounded-2xl border border-border bg-card p-7 transition hover:border-primary/40 hover:shadow-sm"
-          >
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">
-              <Icon className="h-5 w-5" />
-            </div>
-            <h3 className="mt-5 font-serif text-2xl">{title}</h3>
-            <ul className="mt-3 space-y-2">
-              {items.map((it) => (
-                <li key={it} className="flex items-start gap-2 leading-relaxed text-muted-foreground">
-                  <Check className="mt-1 h-4 w-4 shrink-0 text-primary" />
-                  <span>{it}</span>
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
+        {t.pillars.map(({ title, items }, i) => {
+          const Icon = METHOD_ICONS[i];
+          return (
+            <article
+              key={title}
+              className="group rounded-2xl border border-border bg-card p-7 transition hover:border-primary/40 hover:shadow-sm"
+            >
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+                <Icon className="h-5 w-5" />
+              </div>
+              <h3 className="mt-5 font-serif text-2xl">{title}</h3>
+              <ul className="mt-3 space-y-2">
+                {items.map((it) => (
+                  <li key={it} className="flex items-start gap-2 leading-relaxed text-muted-foreground">
+                    <Check className="mt-1 h-4 w-4 shrink-0 text-primary" />
+                    <span>{it}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          );
+        })}
       </div>
     </section>
   );
 }
 
 function WhatYouGet() {
-  const items = [
-    "Análise completa do seu Instagram (bio, feed, destaques, capas, linha editorial e percepção geral).",
-    "Avaliação da sua identidade visual e da coerência entre todos os seus pontos de contato.",
-    "Diagnóstico da sua comunicação e do seu posicionamento atual.",
-    "Análise do site e/ou landing pages (clareza, autoridade, conversão).",
-    "Mapa da experiência do cliente — do primeiro contato à decisão de contratar.",
-    "Plano de ação personalizado, priorizado por impacto e esforço.",
-    "Recomendações de como aplicar IA para implementar mais rápido, sem perder sua voz.",
-  ];
+  const { lang } = useLanguage();
+  const t = translations[lang].whatYouGet;
   return (
     <section id="entrega" className="border-y border-border/60 bg-linen/60">
       <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-2">
         <div>
           <h2 className="font-serif text-4xl leading-tight tracking-tight md:text-5xl">
-            O que você recebe ao final.
+            {t.title}
           </h2>
           <p className="mt-5 text-muted-foreground">
-            Você receberá um relatório estratégico personalizado, organizado por prioridades,
-            com recomendações práticas para fortalecer sua autoridade digital e orientar suas
-            próximas decisões.
+            {t.p1}
           </p>
           <p className="mt-4 text-muted-foreground">
-            Estruturado para facilitar decisões e orientar ações de maior impacto.
+            {t.p2}
           </p>
           <div className="mt-8 rounded-xl border border-border bg-card p-6 text-sm leading-relaxed text-muted-foreground">
-            <p className="text-foreground font-medium">Como funciona</p>
+            <p className="text-foreground font-medium">{t.howItWorksTitle}</p>
             <ol className="mt-3 space-y-2">
-              <li><span className="text-primary">1.</span> Você responde um formulário curto e me envia seus links.</li>
-              <li><span className="text-primary">2.</span> Faço a análise em até 7 dias úteis.</li>
-              <li><span className="text-primary">3.</span> Recebe o relatório por e-mail e tem uma call de 60 min comigo para destrinchar tudo.</li>
+              {t.steps.map((step, i) => (
+                <li key={step}><span className="text-primary">{i + 1}.</span> {step}</li>
+              ))}
             </ol>
           </div>
         </div>
         <ul className="space-y-3">
-          {items.map((t) => (
-            <li key={t} className="flex items-start gap-3 rounded-xl bg-card border border-border p-4">
+          {t.items.map((text) => (
+            <li key={text} className="flex items-start gap-3 rounded-xl bg-card border border-border p-4">
               <Check className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-              <span className="leading-relaxed text-foreground">{t}</span>
+              <span className="leading-relaxed text-foreground">{text}</span>
             </li>
           ))}
         </ul>
@@ -285,25 +299,27 @@ function WhatYouGet() {
 }
 
 function SampleReport() {
+  const { lang } = useLanguage();
+  const t = translations[lang].sampleReport;
   return (
     <section id="relatorio" className="mx-auto max-w-6xl px-6 py-24">
       <div className="grid items-center gap-12 md:grid-cols-[1.1fr_1fr]">
         <div className="order-2 md:order-1">
           <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_30px_80px_-50px_rgba(40,50,40,0.4)]">
             <div className="border-b border-border bg-secondary/80 px-6 py-3 text-xs uppercase tracking-[0.18em] text-muted-foreground">
-              Pré-visualização · relatório modelo
+              {t.previewLabel}
             </div>
             <div className="space-y-5 p-8">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-primary">Avaliação Estratégica</p>
+                  <p className="text-xs uppercase tracking-[0.2em] text-primary">{t.kicker}</p>
                   <h3 className="mt-1 font-serif text-2xl leading-tight">
-                    Diagnóstico de Presença Digital
+                    {t.reportTitle}
                   </h3>
-                  <p className="mt-1 text-xs text-muted-foreground">Cliente Exemplo · Data: 29/06/2026</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{t.clientLine}</p>
                 </div>
                 <div className="rounded-xl border border-border bg-secondary/60 px-4 py-3 text-center">
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Nota Geral</p>
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{t.scoreLabel}</p>
                   <p className="font-serif text-3xl leading-none text-foreground">7,2</p>
                   <p className="text-[10px] text-muted-foreground">/ 10</p>
                 </div>
@@ -311,39 +327,37 @@ function SampleReport() {
               <div className="h-px bg-border" />
               <div>
                 <p className="mb-3 text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-                  Índice de Autoridade Digital
+                  {t.radarLabel}
                 </p>
-                <AuthorityRadar />
+                <AuthorityRadar axes={t.radarAxes} />
               </div>
               <div className="h-px bg-border" />
               <div className="grid gap-3 text-sm">
-                <Row label="Posicionamento" value="Comunica serviço, não autoridade" />
-                <Row label="Clareza da promessa" value="Parcial" />
-                <Row label="Prioridade #1" value="Reescrever bio + destaques" />
+                {t.rows.map((row) => (
+                  <Row key={row.label} label={row.label} value={row.value} />
+                ))}
               </div>
               <a
                 href="/relatorio-exemplo"
                 className="mt-2 inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
               >
-                Ver relatório completo <ArrowRight className="h-4 w-4" />
+                {t.viewFullReport} <ArrowRight className="h-4 w-4" />
               </a>
             </div>
           </div>
         </div>
         <div className="order-1 md:order-2">
           <h2 className="font-serif text-4xl leading-tight tracking-tight md:text-5xl">
-            Veja exatamente como o relatório chega até você.
+            {t.title}
           </h2>
           <p className="mt-5 text-muted-foreground">
-            Sem jargão, sem 80 slides de teoria. Um documento claro, organizado por prioridade,
-            que mostra o que está funcionando, o que não está, e o caminho mais curto entre os
-            dois.
+            {t.subtitle}
           </p>
           <Link
             to="/relatorio-exemplo"
             className="mt-6 inline-flex items-center gap-2 rounded-md border border-border bg-card px-5 py-3 text-sm font-medium transition hover:bg-secondary"
           >
-            Abrir relatório modelo <ArrowRight className="h-4 w-4" />
+            {t.openSampleReport} <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>
@@ -360,14 +374,9 @@ function Row({ label, value }: { label: string; value: string }) {
   );
 }
 
-function AuthorityRadar() {
-  const axes = [
-    { label: "Presença", value: 0.72 },
-    { label: "Posicionamento", value: 0.58 },
-    { label: "Comunicação", value: 0.81 },
-    { label: "Credibilidade", value: 0.66 },
-    { label: "Conversão", value: 0.49 },
-  ];
+function AuthorityRadar({ axes: axisLabels }: { axes: readonly string[] }) {
+  const values = [0.72, 0.58, 0.81, 0.66, 0.49];
+  const axes = axisLabels.map((label, i) => ({ label, value: values[i] }));
   const size = 220;
   const cx = size / 2;
   const cy = size / 2;
@@ -440,35 +449,32 @@ function AuthorityRadar() {
 }
 
 function About() {
+  const { lang } = useLanguage();
+  const t = translations[lang].about;
   return (
     <section className="border-y border-border/60 bg-secondary/60">
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-24 md:grid-cols-[1fr_1.3fr]">
         <img
           src={sandraPortrait}
-          alt="Retrato de Sandra Campos"
+          alt={t.imageAlt}
           width={1024}
           height={1280}
           loading="lazy"
           className="mx-auto w-full max-w-sm rounded-2xl border border-border object-cover"
         />
         <div>
-          <span className="text-xs uppercase tracking-[0.2em] text-primary">Quem assina o diagnóstico</span>
+          <span className="text-xs uppercase tracking-[0.2em] text-primary">{t.kicker}</span>
           <h2 className="mt-3 font-serif text-4xl leading-tight tracking-tight md:text-5xl">
-            Sandra Campos.
+            {t.name}
           </h2>
           <p className="mt-5 leading-relaxed text-muted-foreground">
-            Mais de 15 anos trabalhando na área da saúde mental, no Brasil e nos Estados Unidos,
-            me ensinaram a identificar padrões, construir confiança e compreender como as
-            pessoas tomam decisões.
+            {t.p1}
           </p>
           <p className="mt-4 leading-relaxed text-muted-foreground">
-            Hoje aplico esse mesmo olhar estratégico para analisar a presença digital de
-            terapeutas e profissionais liberais, ajudando-os a transmitir online a mesma
-            credibilidade que já demonstram em seus atendimentos.
+            {t.p2}
           </p>
           <p className="mt-6 font-serif text-2xl italic text-foreground">
-            "Mais seguidores não significam mais clientes. Credibilidade gera muito mais
-            resultado do que visibilidade sem estratégia."
+            {t.quote}
           </p>
         </div>
       </div>
@@ -477,49 +483,43 @@ function About() {
 }
 
 function Pricing() {
-  const included = [
-    "Análise estratégica de todos os pontos de contato digitais",
-    "Relatório estratégico personalizado, organizado por prioridades",
-    "Plano de ação priorizado e personalizado",
-    "Call de 60 minutos para apresentação do diagnóstico",
-    "Recomendações de uso de IA para implementação",
-    "30 dias de suporte por e-mail para dúvidas pontuais",
-  ];
+  const { lang } = useLanguage();
+  const t = translations[lang].pricing;
   return (
     <section id="investimento" className="mx-auto max-w-6xl px-6 py-24">
       <div className="mx-auto max-w-3xl text-center">
-        <span className="text-xs uppercase tracking-[0.2em] text-primary">Investimento</span>
+        <span className="text-xs uppercase tracking-[0.2em] text-primary">{t.kicker}</span>
         <h2 className="mt-3 font-serif text-4xl leading-tight tracking-tight md:text-5xl">
-          Uma avaliação estratégica para tomar decisões com mais clareza e confiança.
+          {t.title}
         </h2>
       </div>
       <div className="mx-auto mt-12 max-w-2xl overflow-hidden rounded-3xl border border-border bg-card shadow-[0_30px_80px_-50px_rgba(40,50,40,0.35)]">
         <div className="border-b border-border bg-secondary px-8 py-5 text-center">
           <p className="text-xs uppercase tracking-[0.2em] text-secondary-foreground">
-            Avaliação Estratégica de Presença Digital™
+            {t.badge}
           </p>
         </div>
         <div className="px-8 py-10 text-center">
           <p className="font-serif text-6xl text-foreground">{PRICE_BRL}</p>
-          <p className="mt-2 text-sm text-muted-foreground">pagamento único · em até 3x sem juros</p>
+          <p className="mt-2 text-sm text-muted-foreground">{t.priceNote}</p>
           <ul className="mx-auto mt-8 max-w-md space-y-3 text-left">
-            {included.map((t) => (
-              <li key={t} className="flex items-start gap-3 text-sm">
+            {t.included.map((text) => (
+              <li key={text} className="flex items-start gap-3 text-sm">
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <span className="leading-relaxed text-foreground">{t}</span>
+                <span className="leading-relaxed text-foreground">{text}</span>
               </li>
             ))}
           </ul>
           <a
-            href={WHATSAPP_URL}
+            href={whatsappUrl(lang)}
             target="_blank"
             rel="noreferrer"
             className="mt-10 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"
           >
-            Solicitar minha Avaliação Estratégica <ArrowRight className="h-4 w-4" />
+            {t.cta} <ArrowRight className="h-4 w-4" />
           </a>
           <p className="mt-4 text-xs text-muted-foreground">
-            Vagas limitadas para garantir a profundidade e a personalização de cada análise.
+            {t.footnote}
           </p>
         </div>
       </div>
@@ -528,32 +528,16 @@ function Pricing() {
 }
 
 function FAQ() {
-  const faqs = [
-    {
-      q: "Preciso ter Instagram ativo?",
-      a: "Sim, idealmente. A análise inclui sua presença no Instagram, mas também olha site, landing pages, identidade visual e experiência do cliente. Se você ainda não tem Instagram, conversamos antes para ver se faz sentido.",
-    },
-    {
-      q: "Vou precisar postar mais depois?",
-      a: "Não necessariamente. A maioria das recomendações é sobre clareza, posicionamento e percepção de valor — não sobre volume de conteúdo. Frequência só entra no plano se for realmente o que move o seu objetivo.",
-    },
-    {
-      q: "Quanto tempo leva?",
-      a: "Em média 7 dias úteis entre o recebimento do seu material e a entrega do relatório. A call de apresentação é agendada na semana seguinte.",
-    },
-    {
-      q: "Você implementa as mudanças por mim?",
-      a: "A Avaliação Estratégica é o diagnóstico e o plano. A implementação fica com você (ou sua equipe), com o passo a passo no relatório. Se quiser apoio na execução, conversamos sobre formato à parte.",
-    },
-  ];
+  const { lang } = useLanguage();
+  const t = translations[lang].faq;
   return (
     <section className="border-y border-border/60 bg-linen/60">
       <div className="mx-auto max-w-3xl px-6 py-24">
         <h2 className="font-serif text-4xl leading-tight tracking-tight md:text-5xl">
-          Dúvidas que aparecem com frequência.
+          {t.title}
         </h2>
         <div className="mt-10 divide-y divide-border rounded-2xl border border-border bg-card">
-          {faqs.map((f) => (
+          {t.items.map((f) => (
             <details key={f.q} className="group p-6">
               <summary className="flex cursor-pointer list-none items-start justify-between gap-6 font-medium text-foreground">
                 <span>{f.q}</span>
@@ -569,28 +553,31 @@ function FAQ() {
 }
 
 function FinalCTA() {
+  const { lang } = useLanguage();
+  const t = translations[lang].finalCTA;
   return (
     <section className="mx-auto max-w-4xl px-6 py-24 text-center">
       <h2 className="font-serif text-4xl leading-tight tracking-tight md:text-5xl">
-        Você já sabe cuidar das pessoas. Eu mostro como o mercado pode finalmente perceber esse valor.
+        {t.title}
       </h2>
       <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
-        Sem mudar sua essência. Só fazendo sua presença digital contar a mesma história que
-        você já entrega todos os dias no atendimento.
+        {t.subtitle}
       </p>
       <a
-        href={WHATSAPP_URL}
+        href={whatsappUrl(lang)}
         target="_blank"
         rel="noreferrer"
         className="mt-8 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"
       >
-        Solicitar minha Avaliação Estratégica <ArrowRight className="h-4 w-4" />
+        {t.cta} <ArrowRight className="h-4 w-4" />
       </a>
     </section>
   );
 }
 
 function Footer() {
+  const { lang } = useLanguage();
+  const t = translations[lang].footer;
   return (
     <footer className="border-t border-border bg-secondary/70">
       <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-6 py-10 text-sm text-muted-foreground md:flex-row md:items-center">
@@ -598,14 +585,14 @@ function Footer() {
           <Leaf className="h-4 w-4 text-primary" />
           <span className="font-serif text-lg">Sandra Campos</span>
         </div>
-        <p>Consultoria de Posicionamento e Presença Digital com IA.</p>
+        <p>{t.tagline}</p>
         <a
           href="https://instagram.com"
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center gap-2 hover:text-foreground"
         >
-          <Instagram className="h-4 w-4" /> Instagram
+          <Instagram className="h-4 w-4" /> {t.instagram}
         </a>
       </div>
       <div className="border-t border-border py-4 text-center text-xs text-muted-foreground">
