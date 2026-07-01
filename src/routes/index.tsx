@@ -70,11 +70,15 @@ function LanguageToggle() {
         aria-pressed={lang === "pt"}
         aria-label="Português"
         title="Português"
-        className={`flex h-7 w-8 items-center justify-center rounded-full text-base leading-none transition ${
+        className={`flex h-7 w-9 items-center justify-center rounded-full transition ${
           lang === "pt" ? "bg-card shadow-sm ring-1 ring-primary/40" : "opacity-50 hover:opacity-100"
         }`}
       >
-        🇧🇷
+        <svg viewBox="0 0 20 14" width="20" height="14" aria-hidden="true" className="rounded-[2px]">
+          <rect width="20" height="14" fill="#009c3b" />
+          <polygon points="10,1.5 18.5,7 10,12.5 1.5,7" fill="#ffdf00" />
+          <circle cx="10" cy="7" r="2.6" fill="#002776" />
+        </svg>
       </button>
       <button
         type="button"
@@ -82,15 +86,22 @@ function LanguageToggle() {
         aria-pressed={lang === "en"}
         aria-label="English"
         title="English"
-        className={`flex h-7 w-8 items-center justify-center rounded-full text-base leading-none transition ${
+        className={`flex h-7 w-9 items-center justify-center rounded-full transition ${
           lang === "en" ? "bg-card shadow-sm ring-1 ring-primary/40" : "opacity-50 hover:opacity-100"
         }`}
       >
-        🇺🇸
+        <svg viewBox="0 0 20 14" width="20" height="14" aria-hidden="true" className="rounded-[2px]">
+          <rect width="20" height="14" fill="#b22234" />
+          {[1, 3, 5, 7, 9, 11].map((y) => (
+            <rect key={y} y={y} width="20" height="1" fill="#fff" />
+          ))}
+          <rect width="9" height="7" fill="#3c3b6e" />
+        </svg>
       </button>
     </div>
   );
 }
+
 
 function Header() {
   const { lang } = useLanguage();
