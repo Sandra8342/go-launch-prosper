@@ -1,9 +1,22 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Check, Instagram, Layout, MessageSquare, Sparkles, Compass, Leaf } from "lucide-react";
 import heroDesk from "@/assets/hero-desk.jpg";
 import sandraPortrait from "@/assets/sandra-portrait.jpg";
 import { LanguageProvider, useLanguage, type Lang } from "@/lib/language";
 import { translations } from "@/lib/translations";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -29,7 +42,70 @@ const PRICE_BRL = "R$ 697";
 
 function whatsappUrl(lang: Lang) {
   const message = encodeURIComponent(translations[lang].whatsappMessage);
-  return `https://wa.me/5500000000000?text=${message}`;
+  return `https://wa.me/18572498342?text=${message}`;
+}
+
+function ContactDialog({ lang, trigger }: { lang: Lang; trigger: React.ReactNode }) {
+  const t = translations[lang].contactForm;
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [reason, setReason] = useState("");
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Solicitação de Avaliação Estratégica - ${name}`);
+    const body = encodeURIComponent(`Nome: ${name}\n\nMotivo do contato:\n${reason}`);
+    window.location.href = `mailto:metodoleve.digital@gmail.com?subject=${subject}&body=${body}`;
+    setOpen(false);
+    setName("");
+    setReason("");
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>{trigger}</DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{t.title}</DialogTitle>
+          <DialogDescription>{t.description}</DialogDescription>
+        </DialogHeader>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="contact-name">{t.nameLabel}</Label>
+            <Input
+              id="contact-name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder={t.namePlaceholder}
+              required
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="contact-reason">{t.reasonLabel}</Label>
+            <Textarea
+              id="contact-reason"
+              value={reason}
+              onChange={(e) => setReason(e.target.value)}
+              placeholder={t.reasonPlaceholder}
+              rows={3}
+              required
+            />
+          </div>
+          <Button type="submit" className="w-full">
+            {t.submit}
+          </Button>
+        </form>
+        <a
+          href={whatsappUrl(lang)}
+          target="_blank"
+          rel="noreferrer"
+          className="block text-center text-xs text-muted-foreground hover:text-foreground hover:underline"
+        >
+          {t.whatsappAlt}
+        </a>
+      </DialogContent>
+    </Dialog>
+  );
 }
 
 function LandingPage() {
@@ -121,14 +197,17 @@ function Header() {
         </nav>
         <div className="flex items-center gap-3">
           <LanguageToggle />
-          <a
-            href={whatsappUrl(lang)}
-            target="_blank"
-            rel="noreferrer"
-            className="hidden rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:bg-primary/90 md:inline-flex"
-          >
-            {t.cta}
-          </a>
+          <ContactDialog
+            lang={lang}
+            trigger={
+              <button
+                type="button"
+                className="hidden rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:bg-primary/90 md:inline-flex"
+              >
+                {t.cta}
+              </button>
+            }
+          />
         </div>
       </div>
     </header>
@@ -153,14 +232,17 @@ function Hero() {
             {t.subtitle}
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <a
-              href={whatsappUrl(lang)}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"
-            >
-              {t.ctaPrimary} <ArrowRight className="h-4 w-4" />
-            </a>
+            <ContactDialog
+              lang={lang}
+              trigger={
+                <button
+                  type="button"
+                  className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"
+                >
+                  {t.ctaPrimary} <ArrowRight className="h-4 w-4" />
+                </button>
+              }
+            />
             <a
               href="#relatorio"
               className="inline-flex items-center gap-2 rounded-md border border-border px-5 py-3 text-sm font-medium text-foreground transition hover:bg-secondary"
@@ -521,14 +603,17 @@ function Pricing() {
               </li>
             ))}
           </ul>
-          <a
-            href={whatsappUrl(lang)}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-10 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"
-          >
-            {t.cta} <ArrowRight className="h-4 w-4" />
-          </a>
+          <ContactDialog
+            lang={lang}
+            trigger={
+              <button
+                type="button"
+                className="mt-10 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"
+              >
+                {t.cta} <ArrowRight className="h-4 w-4" />
+              </button>
+            }
+          />
           <p className="mt-4 text-xs text-muted-foreground">
             {t.footnote}
           </p>
@@ -574,14 +659,17 @@ function FinalCTA() {
       <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
         {t.subtitle}
       </p>
-      <a
-        href={whatsappUrl(lang)}
-        target="_blank"
-        rel="noreferrer"
-        className="mt-8 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"
-      >
-        {t.cta} <ArrowRight className="h-4 w-4" />
-      </a>
+      <ContactDialog
+        lang={lang}
+        trigger={
+          <button
+            type="button"
+            className="mt-8 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition hover:bg-primary/90"
+          >
+            {t.cta} <ArrowRight className="h-4 w-4" />
+          </button>
+        }
+      />
     </section>
   );
 }
