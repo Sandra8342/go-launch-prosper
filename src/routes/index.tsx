@@ -587,7 +587,7 @@ function Footer() {
         </div>
         <p>{t.tagline}</p>
         <a
-          href="https://instagram.com"
+          href="https://instagram.com/sandra.metodoleve"
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center gap-2 hover:text-foreground"
