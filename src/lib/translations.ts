@@ -37,20 +37,28 @@ export const translations = {
         "Sua presença digital será analisada de forma estruturada para identificar os pontos que fortalecem — e os que enfraquecem — sua autoridade.",
       pillars: [
         {
-          title: "Presença Digital",
-          items: ["Instagram", "Site", "Landing Page", "WhatsApp", "Primeira impressão"],
+          title: "Diagnóstico Estratégico",
+          items: ["Instagram, site e landing page", "WhatsApp e primeira impressão", "Todos os pontos de contato com o cliente"],
         },
         {
           title: "Posicionamento",
           items: ["Clareza da mensagem", "Especialização", "Percepção de valor", "Diferenciação"],
         },
         {
-          title: "Comunicação",
+          title: "Credibilidade Digital",
+          items: ["Autoridade", "Confiança", "Provas sociais", "Conversão"],
+        },
+        {
+          title: "Comunicação Estratégica",
           items: ["Tom de voz", "Identidade visual", "Consistência", "Experiência do cliente"],
         },
         {
-          title: "Credibilidade",
-          items: ["Autoridade", "Confiança", "Provas sociais", "Conversão"],
+          title: "Inteligência Artificial Aplicada",
+          items: [
+            "Onde a IA pode economizar seu tempo",
+            "Recomendações de ferramentas, sem perder sua voz",
+            "Prioridades de implementação",
+          ],
         },
       ],
     },
@@ -190,20 +198,28 @@ export const translations = {
         "Your digital presence is analyzed in a structured way to identify what strengthens — and what weakens — your authority.",
       pillars: [
         {
-          title: "Digital Presence",
-          items: ["Instagram", "Website", "Landing page", "WhatsApp", "First impression"],
+          title: "Strategic Diagnosis",
+          items: ["Instagram, website and landing page", "WhatsApp and first impression", "Every client touchpoint"],
         },
         {
           title: "Positioning",
           items: ["Message clarity", "Specialization", "Perceived value", "Differentiation"],
         },
         {
-          title: "Communication",
+          title: "Digital Credibility",
+          items: ["Authority", "Trust", "Social proof", "Conversion"],
+        },
+        {
+          title: "Strategic Communication",
           items: ["Tone of voice", "Visual identity", "Consistency", "Client experience"],
         },
         {
-          title: "Credibility",
-          items: ["Authority", "Trust", "Social proof", "Conversion"],
+          title: "Applied Artificial Intelligence",
+          items: [
+            "Where AI can save you time",
+            "Tool recommendations, without losing your voice",
+            "Implementation priorities",
+          ],
         },
       ],
     },

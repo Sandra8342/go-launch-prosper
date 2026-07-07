@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
+  Bot,
   Check,
   Instagram,
   Layout,
@@ -236,7 +237,7 @@ function ForWhom() {
   );
 }
 
-const METHOD_ICONS = [Compass, Layout, MessageSquare, Sparkles];
+const METHOD_ICONS = [Compass, Layout, Sparkles, MessageSquare, Bot];
 
 function Method() {
   const { lang } = useLanguage();
