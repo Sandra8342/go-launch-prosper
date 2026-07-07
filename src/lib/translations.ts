@@ -107,7 +107,6 @@ export const translations = {
       title: "Uma Avaliação Estratégica para tomar decisões com mais clareza e confiança.",
       badge: "Avaliação Estratégica de Presença Digital™",
       price: "R$497",
-      priceNote: "pagamento único · em até 3x sem juros",
       included: [
         "Análise estratégica de todos os pontos de contato digitais",
         "Relatório estratégico personalizado, organizado por prioridades",
@@ -270,7 +269,6 @@ export const translations = {
       title: "An Avaliação Estratégica to help you make decisions with more clarity and confidence.",
       badge: "Avaliação Estratégica de Presença Digital™",
       price: "US$97",
-      priceNote: "one-time payment · up to 3x interest-free",
       included: [
         "Strategic analysis of every digital touchpoint",
         "Personalized strategic report, organized by priority",

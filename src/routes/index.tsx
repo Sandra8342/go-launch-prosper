@@ -592,7 +592,6 @@ function Pricing() {
         </div>
         <div className="px-8 py-10 text-center">
           <p className="font-serif text-6xl text-foreground">{t.price}</p>
-          <p className="mt-2 text-sm text-muted-foreground">{t.priceNote}</p>
           <ul className="mx-auto mt-8 max-w-md space-y-3 text-left">
             {t.included.map((text) => (
               <li key={text} className="flex items-start gap-3 text-sm">
