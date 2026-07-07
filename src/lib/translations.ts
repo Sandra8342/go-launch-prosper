@@ -148,21 +148,12 @@ export const translations = {
     },
     footer: {
       tagline: "Consultoria de Posicionamento e Presença Digital com IA.",
+      whatsapp: "WhatsApp",
+      email: "E-mail",
       instagram: "Instagram",
     },
     whatsappMessage:
-      "Olá Sandra, quero agendar uma Avaliação Estratégica de Presença Digital.",
-    contactForm: {
-      title: "Solicitar minha Avaliação Estratégica",
-      description:
-        "Preencha os dados abaixo e preparamos um e-mail com tudo pronto para você enviar.",
-      nameLabel: "Nome",
-      namePlaceholder: "Seu nome completo",
-      reasonLabel: "Motivo do contato",
-      reasonPlaceholder: "Conte brevemente o que você procura",
-      submit: "Enviar por e-mail",
-      whatsappAlt: "Prefere falar por WhatsApp?",
-    },
+      "Olá! Gostaria de solicitar minha Avaliação Estratégica de Presença Digital.",
   },
   en: {
     header: {
@@ -309,20 +300,11 @@ export const translations = {
     },
     footer: {
       tagline: "AI-powered Positioning and Digital Presence Consulting.",
+      whatsapp: "WhatsApp",
+      email: "Email",
       instagram: "Instagram",
     },
     whatsappMessage:
-      "Hello Sandra, I'd like to schedule an Avaliação Estratégica de Presença Digital.",
-    contactForm: {
-      title: "Request my Avaliação Estratégica",
-      description:
-        "Fill in the details below and we'll prepare an email with everything ready to send.",
-      nameLabel: "Name",
-      namePlaceholder: "Your full name",
-      reasonLabel: "Reason for contact",
-      reasonPlaceholder: "Briefly share what you're looking for",
-      submit: "Send by email",
-      whatsappAlt: "Prefer to talk on WhatsApp?",
-    },
+      "Hello! I'd like to request my Avaliação Estratégica de Presença Digital.",
   },
 } as const;
