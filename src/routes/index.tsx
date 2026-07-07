@@ -38,8 +38,6 @@ export const Route = createFileRoute("/")({
   component: LandingPage,
 });
 
-const PRICE_BRL = "R$ 697";
-
 function whatsappUrl(lang: Lang) {
   const message = encodeURIComponent(translations[lang].whatsappMessage);
   return `https://wa.me/18572498342?text=${message}`;
@@ -593,7 +591,7 @@ function Pricing() {
           </p>
         </div>
         <div className="px-8 py-10 text-center">
-          <p className="font-serif text-6xl text-foreground">{PRICE_BRL}</p>
+          <p className="font-serif text-6xl text-foreground">{t.price}</p>
           <p className="mt-2 text-sm text-muted-foreground">{t.priceNote}</p>
           <ul className="mx-auto mt-8 max-w-md space-y-3 text-left">
             {t.included.map((text) => (
